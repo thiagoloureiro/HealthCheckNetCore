@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    ports:
+      - "15672:15672"
+  consul:
+    image: consul:latest
+    ports:
+      - "8500:8500"
+      - "8600:8600"
+  merchantdb:
+    image: postgres:10-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: merchant
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+  healthcheckpoc:
+    image: ${DOCKER_REGISTRY-}healthcheckpoc
+    build:
+      context: .
+      dockerfile: HealthCheckPOC/Dockerfile
