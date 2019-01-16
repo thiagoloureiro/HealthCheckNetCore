@@ -10,12 +10,12 @@ services:
     ports:
       - "8500:8500"
       - "8600:8600"
-  merchantdb:
+  postgres:
     image: postgres:10-alpine
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: merchant
+      POSTGRES_DB: defaultdb
   redis:
     container_name: redis
     image: redis
